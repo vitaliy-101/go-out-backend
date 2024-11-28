@@ -1,0 +1,88 @@
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user1",
+  "password": "password1"
+}
+
+### Регистрация второго пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user2",
+  "password": "password2"
+}
+
+### Регистрация третьего пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user3",
+  "password": "password3"
+}
+
+### Регистрация четвертого пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user4",
+  "password": "password4"
+}
+
+### Регистрация пятого пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user5",
+  "password": "password5"
+}
+
+### Регистрация шестого пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user6",
+  "password": "password6"
+}
+
+### Регистрация седьмого пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user7",
+  "password": "password7"
+}
+
+### Регистрация восьмого пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user8",
+  "password": "password8"
+}
+
+### Регистрация девятого пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user9",
+  "password": "password9"
+}
+
+### Регистрация десятого пользователя
+POST http://localhost:8095/register
+Content-Type: application/json
+
+{
+  "nickname": "user10",
+  "password": "password10"
+}
