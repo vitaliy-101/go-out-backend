@@ -12,8 +12,7 @@ import java.util.Set;
 @Repository
 public interface UserEventRepository extends JpaRepository<UserEvent, Long> {
     @Query(value = "SELECT ue.* FROM user_event ue " +
-            "JOIN user_playground_event upe ON ue.id = upe.user_event_id " +
-            "JOIN playground_event pe ON upe.playground_event_id = pe.id " +
+            "JOIN playground_event pe ON ue.playground_event_id = pe.id " +
             "WHERE pe.id = :playgroundEventId", nativeQuery = true)
     List<UserEvent> getUserEventsByPlaygroundEventId(@Param("playgroundEventId") Long playgroundEventId);
 

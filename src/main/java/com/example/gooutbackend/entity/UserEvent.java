@@ -27,11 +27,7 @@ public class UserEvent {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_playground_event",
-            joinColumns = @JoinColumn(name = "user_event_id"),
-            inverseJoinColumns = @JoinColumn(name = "playground_event_id")
-    )
-    private Set<PlaygroundEvent> playgroundEvents;
+    @ManyToOne
+    @JoinColumn(name = "playground_event_id")
+    private PlaygroundEvent playgroundEvent;
 }

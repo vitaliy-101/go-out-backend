@@ -77,17 +77,9 @@ create table if not exists user_event
     will_come BOOLEAN,
     creator BOOLEAN,
     user_id BIGINT,
-    CONSTRAINT pk_user_event primary key (id),
-    CONSTRAINT fk_event_user_id  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-);
-
-create table if not exists user_playground_event
-(
-    id BIGSERIAL,
-    user_event_id BIGINT,
     playground_event_id BIGINT,
-    CONSTRAINT pk_user_playground_event primary key (id),
-    CONSTRAINT fk_user_event_id  FOREIGN KEY (user_event_id) REFERENCES user_event (id) ON DELETE CASCADE,
+    CONSTRAINT pk_user_event primary key (id),
+    CONSTRAINT fk_event_user_id  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     CONSTRAINT fk_playground_event_id  FOREIGN KEY (playground_event_id) REFERENCES playground_event (id) ON DELETE CASCADE
 );
 

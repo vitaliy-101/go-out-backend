@@ -30,12 +30,9 @@ public class PlaygroundEvent {
     @JoinColumn(name = "playground_id")
     private Playground playground;
 
-    @ManyToMany(mappedBy = "playgroundEvents")
-    private Set<UserEvent> userEvents = new HashSet<>();
+    @OneToMany(mappedBy = "playgroundEvent", cascade = CascadeType.ALL)
+    private Set<UserEvent> userEvents;
 
-    public void addUserEvent(UserEvent userEvent) {
-        userEvents.add(userEvent);
-    }
 
 
 }

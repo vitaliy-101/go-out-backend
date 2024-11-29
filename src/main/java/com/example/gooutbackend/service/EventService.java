@@ -14,10 +14,7 @@ import com.example.gooutbackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,26 +47,22 @@ public class EventService {
             userEvent.setWillCome(true);
             userEvent.setCreator(false);
             userEvent.setUser(userRepository.getReferenceById(userId));
-            userEvent.setPlaygroundEvents(new HashSet<>(List.of(existedPlaygroundEvent)));
+            userEvent.setPlaygroundEvent(existedPlaygroundEvent);
             userEventRepository.save(userEvent);
-            existedPlaygroundEvent.addUserEvent(userEvent);
-            playgroundEventRepository.save(existedPlaygroundEvent);
-
         }
         else {
             PlaygroundEvent playgroundEvent = new PlaygroundEvent();
             playgroundEvent.setPlayground(playground);
             playgroundEvent.setStartTime(userEventDtoIn.getStartTime());
             playgroundEvent.setGeneralCollection(userEventDtoIn.getIsGeneralCollection());
+            playgroundEventRepository.save(playgroundEvent);
 
             UserEvent userEvent = new UserEvent();
             userEvent.setWillCome(true);
             userEvent.setCreator(userEventDtoIn.getIsGeneralCollection());
             userEvent.setUser(userRepository.getReferenceById(userId));
-            userEvent.setPlaygroundEvents(new HashSet<>(List.of(playgroundEvent)));
+            userEvent.setPlaygroundEvent(playgroundEvent);
             userEventRepository.save(userEvent);
-            playgroundEvent.addUserEvent(userEvent);
-            playgroundEventRepository.save(playgroundEvent);
         }
     }
 
