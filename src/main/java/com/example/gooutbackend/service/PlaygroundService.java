@@ -43,24 +43,14 @@ public class PlaygroundService {
 
         for (PlaygroundEvent playgroundEvent : playgroundEvents) {
             // Сбор информации для каждого события
-            PlaygroundStateTimeDto playgroundStateTimeDto = new PlaygroundStateTimeDto(
+            PlaygroundStateTimeDto playgroundStateTimeDto = new PlaygroundStateTimeDto(playgroundEvent.getId(),
                     userEventRepository.getUserEventsByPlaygroundEventId(playgroundEvent.getId()).size(),
                     "Высокий",
                     playgroundEvent.getStartTime()
             );
             playgroundInformationDto.addPlaygroundStateTimeDto(playgroundStateTimeDto);
         }
-        playgroundInformationDto.setUserBookTimeList(userBookTimeList(userId, playgroundId));
 
         return playgroundInformationDto;
-    }
-
-    private List<LocalDateTime> userBookTimeList(Long userId, Long playgroundId) {
-        List<PlaygroundEvent> playgroundEvents = playgroundEventRepository.getPlaygroundEventsByUserEvents(userEventRepository.getUserEventsByUserId(userId));
-        return playgroundEvents.stream()
-                .filter(playgroundEvent -> playgroundEvent.getPlayground().getId().equals(playgroundId))
-                .map(PlaygroundEvent::getStartTime)
-                .toList();
-
     }
 }

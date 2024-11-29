@@ -33,4 +33,12 @@ public class EventController {
         eventService.createEvent(userEventDtoIn, userId);
     }
 
+    @DeleteMapping("/user/close")
+    @PreAuthorize("hasRole('USER')")
+    public void closeUserEvent(Long playgroundEventId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((User) authentication.getPrincipal()).getId();
+        eventService.closeEvent(userId, playgroundEventId);
+    }
+
 }

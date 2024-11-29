@@ -28,7 +28,6 @@ public class PlaygroundInformationDto {
     private Boolean currentBookState;
     private String downloadURL;
     private List<PlaygroundStateTimeDto> playgroundStateTimeDtoList = new ArrayList<>();
-    private List<LocalDateTime> userBookTimeList;
 
 
     public void addPlaygroundStateTimeDto(PlaygroundStateTimeDto playgroundStateTimeDto) {

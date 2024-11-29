@@ -66,5 +66,8 @@ public class EventService {
         }
     }
 
+    public void closeEvent(Long userId, Long playgroundEventId) {
+        userEventRepository.deleteByUserIdAndPlaygroundEventId(userId, playgroundEventId);
+    }
 
 }

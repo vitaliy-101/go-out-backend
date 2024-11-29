@@ -23,4 +23,5 @@ public class Sport {
 
     @OneToMany(mappedBy = "sport", cascade = CascadeType.ALL)
     private Set<UserSport> userSports;
+
 }

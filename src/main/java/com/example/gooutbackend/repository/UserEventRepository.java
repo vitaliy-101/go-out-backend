@@ -1,13 +1,14 @@
 package com.example.gooutbackend.repository;
 
 import com.example.gooutbackend.entity.UserEvent;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public interface UserEventRepository extends JpaRepository<UserEvent, Long> {
@@ -16,6 +17,12 @@ public interface UserEventRepository extends JpaRepository<UserEvent, Long> {
             "WHERE pe.id = :playgroundEventId", nativeQuery = true)
     List<UserEvent> getUserEventsByPlaygroundEventId(@Param("playgroundEventId") Long playgroundEventId);
 
-    Set<UserEvent> getUserEventsByUserId(Long id);
+    List<UserEvent> getUserEventsByUserId(Long id);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM UserEvent ue WHERE ue.user.id = :userId AND ue.playgroundEvent.id = :playgroundEventId")
+    void deleteByUserIdAndPlaygroundEventId(Long userId, Long playgroundEventId);
+
 
 }

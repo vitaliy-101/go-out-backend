@@ -81,4 +81,14 @@ public class UserService {
     public void updateUserSportLevel(Long userId, String sportName, Integer sportLevel) {
         userSportRepository.updateLevelByUserIdAndSportName(userId, sportName, sportLevel);
     }
+
+
+    public void updateUserSportName(Long userId, String newSportName) {
+        UserSport userSport = new UserSport();
+        userSport.setUser(userRepository.getReferenceById(userId));
+        userSport.setSport(sportRepository.findSportByName(newSportName));
+        userSport.setLevel(1);
+        userSportRepository.save(userSport);
+    }
+
 }

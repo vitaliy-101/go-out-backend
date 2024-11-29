@@ -23,6 +23,14 @@ public class UserController {
         return userService.getUserInformation(id);
     }
 
+    @PutMapping("/update/sport")
+    @PreAuthorize("hasRole('USER')")
+    public void updateSport(String newSportName) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((User) authentication.getPrincipal()).getId();
+        userService.updateUserSportName(userId, newSportName);
+    }
+
     @PutMapping("/update")
     @PreAuthorize("hasRole('USER')")
     public void updateUser(@RequestBody UserDtoIn userDtoIn) {

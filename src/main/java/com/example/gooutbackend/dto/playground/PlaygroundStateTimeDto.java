@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class PlaygroundStateTimeDto {
+    private Long playgroundEventId;
     private Integer userCount;
     private String level;
     private LocalDateTime startTime;
