@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UserEventDtoIn {
     private Long playgroundId;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH")
     private LocalDateTime startTime;
     private Boolean isGeneralCollection;
 }
