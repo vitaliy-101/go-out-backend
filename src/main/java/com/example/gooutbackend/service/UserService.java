@@ -48,7 +48,6 @@ public class UserService {
 
     public void updateUser(Long id, UserDtoIn userDtoIn) {
         User user = userRepository.getReferenceById(id);
-        user.setNickname(userDtoIn.getNickname());
         user.setName(userDtoIn.getName());
         user.setPriorityArea(userDtoIn.getPriorityArea());
         saveAchievements(userDtoIn.getAchievements(), user);
