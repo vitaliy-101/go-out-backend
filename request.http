@@ -87,3 +87,194 @@ Content-Type: application/json
   "password": "password10"
 }
 
+### Получение информации о пользователе
+GET http://localhost:8095/user/information
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTczMjg4MzEyOCwiZXhwIjoxNzMzMDU1OTI4fQ.mZkwiTPmIaqFCiNCb2iMQb1N9mCMHDEMd5HX8i4SaxbkBl2NnuLGEOIcrDAa5D0S
+
+
+### Обновление спортивной категории пользователя
+PUT http://localhost:8095/user/update/sport?newSportName=Баскетбол
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTczMjg4MzEyOCwiZXhwIjoxNzMzMDU1OTI4fQ.mZkwiTPmIaqFCiNCb2iMQb1N9mCMHDEMd5HX8i4SaxbkBl2NnuLGEOIcrDAa5D0S
+
+###
+PUT http://localhost:8095/user/update/sport?newSportName=Волейбол
+Authorization: Bearer {access_token_2}
+###
+PUT http://localhost:8095/user/update/sport?newSportName=Теннис
+Authorization: Bearer {invalid_access_token}  # Запрос с неверным токеном
+###
+PUT http://localhost:8095/user/update/sport?newSportName=Плавание
+Authorization: Bearer {expired_access_token}  # Запрос с истекшим токеном
+###
+PUT http://localhost:8095/user/update/sport?newSportName=Бег
+Authorization: Bearer {access_token_3}  # Запрос для другого пользователя
+
+### Обновление информации о пользователе
+PUT http://localhost:8095/user/update
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTczMjg4MzEyOCwiZXhwIjoxNzMzMDU1OTI4fQ.mZkwiTPmIaqFCiNCb2iMQb1N9mCMHDEMd5HX8i4SaxbkBl2NnuLGEOIcrDAa5D0S
+Content-Type: application/json
+
+{
+  "name": "Иван Иванов",
+  "priorityArea": "Спортивные достижения",
+  "achievements": ["Чемпион города", "Призер турнира"],
+  "sportNames": ["Футбол", "Баскетбол"]
+}
+###
+PUT http://localhost:8095/user/update
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTczMjg4MzEyOCwiZXhwIjoxNzMzMDU1OTI4fQ.mZkwiTPmIaqFCiNCb2iMQb1N9mCMHDEMd5HX8i4SaxbkBl2NnuLGEOIcrDAa5D0S
+Content-Type: application/json
+
+{
+  "name": "Петр Петров",
+  "priorityArea": "Здоровье",
+  "achievements": ["Призер марафона"],
+  "sportNames": ["Бег"]
+}
+###
+PUT http://localhost:8095/user/update
+Authorization: Bearer {access_token_2}  # Запрос с неверным токеном
+Content-Type: application/json
+
+{
+  "name": "Михаил Михайлов",
+  "priorityArea": "Туризм",
+  "achievements": ["Лучший турист"],
+  "sportNames": ["Плавание"]
+}
+###
+PUT http://localhost:8095/user/update
+Authorization: Bearer {access_token_2}  # Запрос с истекшим токеном
+Content-Type: application/json
+
+{
+  "name": "Наталья Натальевна",
+  "priorityArea": "Йога",
+  "achievements": ["Мастер йоги"],
+  "sportNames": ["Йога"]
+}
+### Удаление спортивной категории пользователя
+DELETE http://localhost:8095/user/delete/sport?sportName=Футбол
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTczMjg4MzEyOCwiZXhwIjoxNzMzMDU1OTI4fQ.mZkwiTPmIaqFCiNCb2iMQb1N9mCMHDEMd5HX8i4SaxbkBl2NnuLGEOIcrDAa5D0S
+
+###
+DELETE http://localhost:8095/user/delete/sport?sportName=Теннис
+Authorization: Bearer {access_token_2}
+###
+DELETE http://localhost:8095/user/delete/sport?sportName=Волейбол
+Authorization: Bearer {access_token_2}  # Запрос с неверным токеном
+###
+DELETE http://localhost:8095/user/delete/sport?sportName=Бокс
+Authorization: Bearer {access_token_2}  # Запрос с истекшим токеном
+###
+DELETE http://localhost:8095/user/delete/sport?sportName=Бег
+Authorization: Bearer {access_token_2}  # Запрос для другого пользователя
+
+### Обновление уровня спорта пользователя
+PUT http://localhost:8095/user/update/sport/level?sportName=Футбол&sportLevel=3
+Authorization: Bearer {access_token_2}
+
+###
+PUT http://localhost:8095/user/update/sport/level?sportName=Баскетбол&sportLevel=2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTczMjg4MzEyOCwiZXhwIjoxNzMzMDU1OTI4fQ.mZkwiTPmIaqFCiNCb2iMQb1N9mCMHDEMd5HX8i4SaxbkBl2NnuLGEOIcrDAa5D0S
+###
+PUT http://localhost:8095/user/update/sport/level?sportName=Волейбол&sportLevel=5
+Authorization: Bearer {access_token_2}  # Запрос с неверным токеном
+###
+PUT http://localhost:8095/user/update/sport/level?sportName=Бокс&sportLevel=4
+Authorization: Bearer {access_token_2}  # Запрос с истекшим токеном
+###
+PUT http://localhost:8095/user/update/sport/level?sportName=Бег&sportLevel=1
+Authorization: Bearer {access_token_2}  # Запрос для другого пользователя
+
+### Создание события
+POST http://localhost:8095/create
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTczMjg4MzEyOCwiZXhwIjoxNzMzMDU1OTI4fQ.mZkwiTPmIaqFCiNCb2iMQb1N9mCMHDEMd5HX8i4SaxbkBl2NnuLGEOIcrDAa5D0S
+Content-Type: application/json
+
+{
+  "playgroundId": 2,
+  "startTime": "2024-11-29T12:36:48",
+  "isGeneralCollection": true
+}
+
+###
+POST http://localhost:8095/create
+Authorization: Bearer {access_token_2}
+Content-Type: application/json
+
+{
+  "playgroundId": 2,
+  "startTime": "2024-12-02T12:00:00",
+  "isGeneralCollection": false
+}
+###
+POST http://localhost:8095/create
+Authorization: Bearer {access_token_2}  # Запрос с неверным токеном
+Content-Type: application/json
+
+{
+  "playgroundId": 3,
+  "startTime": "2024-12-03T14:00:00",
+  "isGeneralCollection": true
+}
+###
+POST http://localhost:8095/create
+Authorization: Bearer {access_token_2} # Запрос с истекшим токеном
+Content-Type: application/json
+
+{
+  "playgroundId": 4,
+  "startTime": "2024-12-04T16:00:00",
+  "isGeneralCollection": false
+}
+
+### Закрытие события пользователя
+DELETE http://localhost:8095/user/close
+Authorization: Bearer {access_token_2}
+Content-Type: application/json
+
+{
+  "playgroundEventId": 1
+}
+###
+DELETE http://localhost:8095/user/close
+Authorization: Bearer {access_token_2}
+Content-Type: application/json
+
+{
+  "playgroundEventId": 2
+}
+###
+DELETE http://localhost:8095/user/close
+Authorization: Bearer {access_token_2}  # Запрос с неверным токеном
+Content-Type: application/json
+
+{
+  "playgroundEventId": 3
+}
+###
+DELETE http://localhost:8095/user/close
+Authorization: Bearer {access_token_2} # Запрос с истекшим токеном
+Content-Type: application/json
+
+{
+  "playgroundEventId": 4
+}
+
+### Получение информации о площадке по ID
+GET http://localhost:8095/user/1
+Authorization: Bearer {access_token_2}
+
+###
+GET http://localhost:8095/user/2
+Authorization: Bearer {access_token_2}
+###
+GET http://localhost:8095/user/3
+Authorization: Bearer {access_token_2}  # Запрос с неверным токеном
+###
+GET http://localhost:8095/user/4
+Authorization: Bearer {access_token_2}  # Запрос с истекшим токеном
+###
+GET http://localhost:8095/user/5
+Authorization: Bearer {access_token_2}  # Запрос для другого пользователя

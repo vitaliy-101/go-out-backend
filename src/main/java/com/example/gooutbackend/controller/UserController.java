@@ -42,7 +42,7 @@ public class UserController {
         userService.updateUser(userId, userDtoIn);
     }
 
-    @DeleteMapping("/delete/sport")
+    @PutMapping("/delete/sport")
     @PreAuthorize("hasRole('USER')")
     public void deleteUserSport(String sportName) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
