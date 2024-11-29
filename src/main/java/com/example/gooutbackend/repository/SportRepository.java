@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface SportRepository extends JpaRepository<Sport, Long> {
 
+    Sport findSportByName(String name);
+
 }

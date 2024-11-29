@@ -18,7 +18,9 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class UserDtoIn {
+    private String nickname;
+    private String name;
     private String priorityArea;
     private List<String> achievements;
-    private List<Long> sportsIds;
+    private List<String> sportNames;
 }

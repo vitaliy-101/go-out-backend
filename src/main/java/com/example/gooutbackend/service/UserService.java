@@ -4,10 +4,7 @@ import com.example.gooutbackend.dto.playground.PlaygroundEventDto;
 import com.example.gooutbackend.dto.sport.SportWithLevelDto;
 import com.example.gooutbackend.dto.user.UserDtoIn;
 import com.example.gooutbackend.dto.user.UserInformationDto;
-import com.example.gooutbackend.entity.Achievement;
-import com.example.gooutbackend.entity.User;
-import com.example.gooutbackend.entity.UserEvent;
-import com.example.gooutbackend.entity.UserSport;
+import com.example.gooutbackend.entity.*;
 import com.example.gooutbackend.mapper.UserMapper;
 import com.example.gooutbackend.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -51,9 +48,11 @@ public class UserService {
 
     public void updateUser(Long id, UserDtoIn userDtoIn) {
         User user = userRepository.getReferenceById(id);
+        user.setNickname(userDtoIn.getNickname());
+        user.setName(userDtoIn.getName());
         user.setPriorityArea(userDtoIn.getPriorityArea());
         saveAchievements(userDtoIn.getAchievements(), user);
-        saveSports(userDtoIn.getSportsIds(), user);
+        saveSports(userDtoIn.getSportNames(), user);
     }
 
     private void saveAchievements(List<String> achievementsInfo, User user) {
@@ -65,13 +64,21 @@ public class UserService {
         }
     }
 
-    private void saveSports(List<Long> sportIds, User user) {
-        for (Long sportId : sportIds) {
+    private void saveSports(List<String> sportNames, User user) {
+        for (String sportName : sportNames) {
             UserSport userSport = new UserSport();
             userSport.setUser(user);
-            userSport.setSport(sportRepository.getReferenceById(sportId));
+            userSport.setSport(sportRepository.findSportByName(sportName));
             userSport.setLevel(1);
             userSportRepository.save(userSport);
         }
+    }
+
+    public void deleteUserSport(Long userId, String sportName) {
+        userSportRepository.deleteByUserIdAndSportName(userId, sportName);
+    }
+
+    public void updateUserSportLevel(Long userId, String sportName, Integer sportLevel) {
+        userSportRepository.updateLevelByUserIdAndSportName(userId, sportName, sportLevel);
     }
 }

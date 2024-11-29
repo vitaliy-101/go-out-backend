@@ -2,9 +2,13 @@ package com.example.gooutbackend.controller;
 
 import com.example.gooutbackend.dto.user.UserDtoIn;
 import com.example.gooutbackend.dto.user.UserInformationDto;
+import com.example.gooutbackend.entity.User;
 import com.example.gooutbackend.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,9 +23,28 @@ public class UserController {
         return userService.getUserInformation(id);
     }
 
-    @PutMapping("/update/{id}")
-    public void updateUser(@PathVariable Long id, @RequestBody UserDtoIn userDtoIn) {
-        userService.updateUser(id, userDtoIn);
+    @PutMapping("/update")
+    @PreAuthorize("hasRole('USER')")
+    public void updateUser(@RequestBody UserDtoIn userDtoIn) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((User) authentication.getPrincipal()).getId();
+        userService.updateUser(userId, userDtoIn);
+    }
+
+    @DeleteMapping("/delete/sport")
+    @PreAuthorize("hasRole('USER')")
+    public void deleteUserSport(String sportName) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((User) authentication.getPrincipal()).getId();
+        userService.deleteUserSport(userId, sportName);
+    }
+
+    @PutMapping("/update/sport/level")
+    @PreAuthorize("hasRole('USER')")
+    public void updateUserSportLevel(String sportName, Integer sportLevel) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((User) authentication.getPrincipal()).getId();
+        userService.updateUserSportLevel(userId, sportName, sportLevel);
     }
 
 }

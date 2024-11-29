@@ -46,7 +46,7 @@ public class JwtService {
                   .builder()
                   .subject(user.getNickname())
                   .issuedAt(new Date(System.currentTimeMillis()))
-                  .expiration(new Date(System.currentTimeMillis() + 24*60*60*1000)) //время истечения срока токена
+                  .expiration(new Date(System.currentTimeMillis() + 48*60*60*1000)) //время истечения срока токена
                   .signWith(getSigninKey())
                   .compact();
      }

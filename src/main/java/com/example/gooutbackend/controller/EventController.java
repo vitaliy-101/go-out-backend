@@ -25,7 +25,7 @@ public class EventController {
         return eventService.getActualEvents();
     }
 
-    @PostMapping("/come")
+    @PostMapping("/create")
     @PreAuthorize("hasRole('USER')")
     public void createEvent(@RequestBody UserEventDtoIn userEventDtoIn) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
