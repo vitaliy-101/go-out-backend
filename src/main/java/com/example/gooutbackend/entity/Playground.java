@@ -44,5 +44,7 @@ public class Playground {
     @OneToMany(mappedBy = "playground")
     private Set<PlaygroundEvent> playgroundEvents;
 
+    @OneToMany(mappedBy = "playground")
+    private Set<PlaygroundPrediction> playgroundPredictions;
 
 }

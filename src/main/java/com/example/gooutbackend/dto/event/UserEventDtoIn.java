@@ -15,5 +15,6 @@ import java.time.LocalDateTime;
 public class UserEventDtoIn {
     private Long playgroundId;
     private LocalDateTime startTime;
+    private Integer userMaxCount;
     private Boolean isGeneralCollection;
 }

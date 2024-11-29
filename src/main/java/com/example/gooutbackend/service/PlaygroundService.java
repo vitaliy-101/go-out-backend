@@ -44,7 +44,7 @@ public class PlaygroundService {
         for (PlaygroundEvent playgroundEvent : playgroundEvents) {
             // Сбор информации для каждого события
             PlaygroundStateTimeDto playgroundStateTimeDto = new PlaygroundStateTimeDto(playgroundEvent.getId(),
-                    userEventRepository.getUserEventsByPlaygroundEventId(playgroundEvent.getId()).size(),
+                    playgroundEvent.getUserMaxCount(), userEventRepository.getUserEventsByPlaygroundEventId(playgroundEvent.getId()).size(),
                     "Высокий",
                     playgroundEvent.getStartTime()
             );

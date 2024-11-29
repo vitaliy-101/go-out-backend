@@ -65,10 +65,21 @@ create table if not exists playground_event
 (
     id BIGSERIAL,
     start_time TIMESTAMP,
+    user_max_count INT,
     general_collection BOOLEAN,
     playground_id BIGINT,
     CONSTRAINT pk_playground_event primary key (id),
     CONSTRAINT fk_event_playground_id  FOREIGN KEY (playground_id) REFERENCES playground (id) ON DELETE CASCADE
+);
+
+create table if not exists playground_prediction
+(
+    id BIGSERIAL,
+    start_time TIMESTAMP,
+    user_count INT,
+    playground_id BIGINT,
+    CONSTRAINT pk_playground_prediction primary key (id),
+    CONSTRAINT fk_prediction_playground_id  FOREIGN KEY (playground_id) REFERENCES playground (id) ON DELETE CASCADE
 );
 
 create table if not exists user_event

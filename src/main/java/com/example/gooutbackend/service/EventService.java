@@ -31,7 +31,7 @@ public class EventService {
         for (PlaygroundEvent playgroundEvent : playgroundEvents) {
             List<UserEvent> userEvents = userEventRepository.getUserEventsByPlaygroundEventId(playgroundEvent.getId());
             Playground playground = playgroundEvent.getPlayground();
-            EventDto eventDto = new EventDto(userEvents.size(), "Высокий",
+            EventDto eventDto = new EventDto(userEvents.size(), playgroundEvent.getUserMaxCount(),"Высокий",
                     new PlaygroundEventInfoDto(playground.getId(),playgroundEvent.getId(), playground.getType(), playground.getTown(), playground.getStreet(), playgroundEvent.getStartTime()));
             eventDtoList.add(eventDto);
         }
@@ -54,6 +54,7 @@ public class EventService {
             PlaygroundEvent playgroundEvent = new PlaygroundEvent();
             playgroundEvent.setPlayground(playground);
             playgroundEvent.setStartTime(userEventDtoIn.getStartTime());
+            playgroundEvent.setUserMaxCount(userEventDtoIn.getUserMaxCount());
             playgroundEvent.setGeneralCollection(userEventDtoIn.getIsGeneralCollection());
             playgroundEventRepository.save(playgroundEvent);
 

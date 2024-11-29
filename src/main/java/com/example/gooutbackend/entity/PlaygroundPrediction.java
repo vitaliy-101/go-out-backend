@@ -5,16 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "playground_event")
-public class PlaygroundEvent {
+@Table(name = "playground_prediction")
+public class PlaygroundPrediction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,19 +19,11 @@ public class PlaygroundEvent {
     @Column(name = "start_time")
     private LocalDateTime startTime;
 
-    @Column(name = "user_max_count")
-    private Integer userMaxCount;
-
-    @Column(name = "general_collection")
-    private Boolean generalCollection;
+    @Column(name = "user_count")
+    private Integer userCount;
 
     @ManyToOne
     @JoinColumn(name = "playground_id")
     private Playground playground;
-
-    @OneToMany(mappedBy = "playgroundEvent", cascade = CascadeType.ALL)
-    private Set<UserEvent> userEvents;
-
-
 
 }

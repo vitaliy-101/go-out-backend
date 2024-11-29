@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class EventDto {
     private Integer userCount;
+    private Integer userMaxCount;
     private String level; //считаем левел (высокий, низкий и тд)
     private PlaygroundEventInfoDto playgroundEventInfoDto;
 }
