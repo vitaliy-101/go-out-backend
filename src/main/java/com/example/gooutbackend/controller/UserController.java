@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/information/{id}")
-    public UserInformationDto getUserInformationDto(@PathVariable Long id) {
-        return userService.getUserInformation(id);
+    @GetMapping("/information")
+    @PreAuthorize("hasRole('USER')")
+    public UserInformationDto getUserInformationDto() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((User) authentication.getPrincipal()).getId();
+        return userService.getUserInformation(userId);
     }
 
     @PutMapping("/update/sport")
