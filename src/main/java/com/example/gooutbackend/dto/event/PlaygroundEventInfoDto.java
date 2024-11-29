@@ -15,6 +15,8 @@ public class PlaygroundEventInfoDto {
     private Long playgroundId;
     private Long playgroundEventId;
     private String type;
+    private String town;
+    private String street;
     private LocalDateTime startTime;
 
 }

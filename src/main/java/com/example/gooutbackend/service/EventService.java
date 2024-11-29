@@ -32,7 +32,7 @@ public class EventService {
             List<UserEvent> userEvents = userEventRepository.getUserEventsByPlaygroundEventId(playgroundEvent.getId());
             Playground playground = playgroundEvent.getPlayground();
             EventDto eventDto = new EventDto(userEvents.size(), "Высокий",
-                    new PlaygroundEventInfoDto(playground.getId(),playgroundEvent.getId(), playground.getType(), playgroundEvent.getStartTime()));
+                    new PlaygroundEventInfoDto(playground.getId(),playgroundEvent.getId(), playground.getType(), playground.getTown(), playground.getStreet(), playgroundEvent.getStartTime()));
             eventDtoList.add(eventDto);
         }
         return eventDtoList;
