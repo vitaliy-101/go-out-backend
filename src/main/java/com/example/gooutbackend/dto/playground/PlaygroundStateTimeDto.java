@@ -17,4 +17,5 @@ public class PlaygroundStateTimeDto {
     private Integer userCount;
     private String level;
     private LocalDateTime startTime;
+    private Boolean isGeneral;
 }
